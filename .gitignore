@@ -1,0 +1,4 @@
+*.o
+vgcore.*
+my_ls
+coding-style-reports.log
