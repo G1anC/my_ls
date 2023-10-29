@@ -10,10 +10,12 @@
 static int ls_functions_explanations(DIR *fd, ls_t *ls)
 {
     struct dirent *x;
+
+    // crée un array dans lequel on met tous les fichiers du dossier
+    
     char **array = malloc(sizeof(char *) * 100); // beurk
     int i = 0;
 
-    // crée un array dans lequel on met tous les fichiers du dossier
 
     while (x = readdir(fd)) {
 
