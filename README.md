@@ -1,4 +1,9 @@
 # my_ls
+
+This is my ls project, 1 year into EPITECH.
+
+--- 
+
 Voici mon ls, en ayant 1 an d'expérience de C.
 
 ***Ne copiez collez pas bêtement ce repo, vous allez juste manger un méchant -42.***
