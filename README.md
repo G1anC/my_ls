@@ -1,6 +1,7 @@
 # my_ls
 
 This is my ls project, 1 year into EPITECH.
+It is a rectreation of the TCSH's ls command.
 
 --- 
 
