@@ -106,7 +106,6 @@ static void one_folder_l_explanations(ls_t *ls, char *folder)
     DIR *fd = NULL;
     struct stat st;
 
-    stat(folder, &st);
     fd = opendir(folder);
 
     // print le total de blocks
@@ -114,6 +113,7 @@ static void one_folder_l_explanations(ls_t *ls, char *folder)
     if (!ls->dir)
         my_printf("total %d\n", st.st_blocks);
     while ((x = readdir(fd))) {
+        stat(x.d_name, &st);
         if (ls->dir) {
             print_all(".", st);
 
