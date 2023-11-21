@@ -109,7 +109,7 @@ static void one_folder_l_explanations(ls_t *ls, char *folder)
     fd = opendir(folder);
 
     // print le total de blocks
-
+    stat(folder, &st);
     if (!ls->dir)
         my_printf("total %d\n", st.st_blocks);
     while ((x = readdir(fd))) {
@@ -144,15 +144,15 @@ static void one_folder_l(ls_t *ls, char *folder)
     if (!ls->dir)
         my_printf("total %d\n", st.st_blocks);
     while ((x = readdir(fd))) {
+        stat(x.d_name, &st);
         if (ls->dir) {
             print_all(".", st);
             break;
-        } 
-        if (ls->hid)
-            print_all(x->d_name, st);
-        else
-            (x->d_name[0] != '.') ? print_all(x->d_name, st) : 0;
-    } exit(closedir(fd));
+        } if (!ls->hid && x->d_name[0] != '.')
+            continue;
+        print_all(x->d_name, st);
+    }
+    exit(closedir(fd));
 }
 
 
