@@ -109,10 +109,17 @@ static void one_folder_l_explanations(ls_t *ls, char *folder)
     fd = opendir(folder);
 
     // print le total de blocks
+
     stat(folder, &st);
     if (!ls->dir)
         my_printf("total %d\n", st.st_blocks);
+
+    // pour tous les fichiers
+
     while ((x = readdir(fd))) {
+
+        //stat des fichiers pour récupérer toutes les infos
+
         stat(x.d_name, &st);
         if (ls->dir) {
             print_all(".", st);
@@ -121,16 +128,16 @@ static void one_folder_l_explanations(ls_t *ls, char *folder)
 
             break;
 
-        // print tous les fichiers si -a
+        // si fichier caché et pas de -a, alors on le skip
 
-        } if (ls->hid)
-            print_all(x->d_name, st);
+        } if (!ls->hid && x->d_name[0] != '.')
+            continue;
 
-        // sinon on print pas les fichiers cachés
+        // sinon on print le fichier
 
-        else
-            (x->d_name[0] != '.') ? print_all(x->d_name, st) : 0;
-    }  exit(closedir(fd));
+        print_all(x->d_name, st);
+    } 
+    exit(closedir(fd));
 }
 
 static void one_folder_l(ls_t *ls, char *folder)
@@ -194,6 +201,7 @@ int ls_l_explanations(ls_t *ls)
             my_printf("\n");
 
     }
+    return 0;
 }
 
 int ls_l(ls_t *ls)
@@ -211,5 +219,6 @@ int ls_l(ls_t *ls)
         print_all(ls->folder[i], st);
         if (ls->folder[i + 1])
             my_printf("\n");
-    } return 0;
+    }
+    return 0;
 }
